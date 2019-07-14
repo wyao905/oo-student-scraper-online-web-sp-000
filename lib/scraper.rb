@@ -3,9 +3,14 @@ require 'pry'
 
 class Scraper
   @@students = []
+  @@student_info = []
   
   def self.students
     @@students
+  end
+  
+  def self.student_info
+    @@student_info
   end
   
   def self.scrape_index_page(index_url)
@@ -19,6 +24,7 @@ class Scraper
   end
 
   def self.scrape_profile_page(profile_url)
+<<<<<<< HEAD
     student_info = {}
     student = Nokogiri::HTML(open(profile_url)).css(".social-icon-container a")
     student.each do |info|
@@ -35,5 +41,15 @@ class Scraper
     student_info[:profile_quote] = Nokogiri::HTML(open(profile_url)).css(".profile-quote").text
     student_info[:bio] = Nokogiri::HTML(open(profile_url)).css("p").text
     student_info
+=======
+    student = Nokogiri::HTML(open(profile_url)).css(".social-icon-container a")
+    binding.pry
+    student_info << {:twitter => student[0].values[0],
+                     :linkedin => student[1].values[0],
+                     :github => student[2].values[0],
+                     :blog => "",
+                     :profile_quote => "",
+                     :bio => ""}
+>>>>>>> 0cddf3298f1115a728e592d9ae804f73d027eb0e
   end
 end
